@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
+import javax.swing.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -20,6 +20,9 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener
 	private boolean right = false;
 	private boolean up = false;
 	private boolean down = false;
+	
+	private int lengthOfSnake = 3;
+	private int moves = 0;
 	
 	private ImageIcon titleImage;
 	private ImageIcon rightMouth;
@@ -39,12 +42,17 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		//timer = new Timer(delay, this);
-		//timer.start();
+		timer = new Timer(delay, this);	
+		timer.start();					
 	}
 	
 	public void paint(Graphics g)
 	{
+		if(moves == 0)
+		{
+			
+		}
+		
 		//draw title image border
 		g.setColor(Color.WHITE);
 		g.drawRect(24, 10, 851, 55);
@@ -60,6 +68,41 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener
 		//draw background for gameplay
 		g.setColor(Color.BLACK);
 		g.fillRect(25,  75,  850,  575);
+		
+		//draw snake
+		rightMouth = new ImageIcon(getClass().getResource("/img/rightmouth.png"));
+		rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);
+		
+		for(int a = 0; a < lengthOfSnake; a++)
+		{
+			if(a == 0 && right)
+			{
+				rightMouth = new ImageIcon(getClass().getResource("/img/rightmouth.png"));
+				rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);		
+			}
+			if(a == 0 && left)
+			{
+				leftMouth = new ImageIcon(getClass().getResource("/img/leftmouth.png"));
+				leftMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);		
+			}
+			if(a == 0 && up)
+			{
+				upMouth = new ImageIcon(getClass().getResource("/img/upmouth.png"));
+				upMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);		
+			}
+			if(a == 0 && down)
+			{
+				downMouth = new ImageIcon(getClass().getResource("/img/downmouth.png"));
+				downMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);		
+			}
+			if(a != 0)
+			{
+				snakeImage = new ImageIcon(getClass().getResource("/img/snakeImage.png"));
+				snakeImage.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);	
+			}
+		}
+		
+		g.dispose();
 		
 	}
 
