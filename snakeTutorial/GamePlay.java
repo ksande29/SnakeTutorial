@@ -50,7 +50,13 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener
 	{
 		if(moves == 0)
 		{
+			snakeXLength[2] = 50;
+			snakeXLength[1] = 75;
+			snakeXLength[0] = 100;
 			
+			snakeYLength[2] = 100;
+			snakeYLength[1] = 7100;
+			snakeYLength[0] = 100;
 		}
 		
 		//draw title image border
@@ -97,7 +103,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener
 			}
 			if(a != 0)
 			{
-				snakeImage = new ImageIcon(getClass().getResource("/img/snakeImage.png"));
+				snakeImage = new ImageIcon(getClass().getResource("/img/snakeimage.png"));
 				snakeImage.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);	
 			}
 		}
